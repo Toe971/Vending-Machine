@@ -31,10 +31,15 @@ exit
 ## Python Dependencies
 
 The python script is intended to run on the Raspberry Pi.
+libatlas library needs to be installed to overcome errors caused by installing pandas, as pandas
+will fail to uninstall numpy.
+See [https://numpy.org/doc/stable/user/troubleshooting-importerror.html?highlight=setup%20py](https://numpy.org/doc/stable/user/troubleshooting-importerror.html?highlight=setup%20py)
 To install system-wide the required python dependencies:
 
-```
+```bash
 sudo pip3 install adafruit-circuitpython-matrixkeypad
+sudo pip3 install pandas
+sudo apt-get install libatlas-base-dev
 ```
 
 ## Available Scripts

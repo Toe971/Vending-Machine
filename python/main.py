@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 # import keyboard module in same directory
-import keyboard
+from keyboard import keypad
 
 
 """ Setup InfluxDB client """
