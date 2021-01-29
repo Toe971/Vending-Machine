@@ -85,9 +85,14 @@ def vending_logic():
             sum += i
         return sum
 
+    sum = []
+    accumulated_sum = 0
+    # if drink_three_bool is 1, means that can pay for all drinks
+    drink_one_bool = 0
+    drink_two_bool = 0
+    drink_three_bool = 0
     while flag != True:
-        sum = []
-        accumulated_sum = 0
+        
         digit = kp.getKey()
         time.sleep(0.3)
         if digit in coin_alphabet:
@@ -98,10 +103,13 @@ def vending_logic():
                 print("Not enough coins deposited yet.")
             elif accumulated_sum < 80:
                 print("Sum is enough for drink_1")
+                drink_one_bool += 1
             elif accumulated_sum < 120:
                 print("Sum is enough for drink_2")
+                drink_two_bool += 1
             elif accumulated_sum >= 120:
                 print("Sum is enough for all drinks!")
+                drink_three_bool += 1
         if digit in drink_digits:
             final_sum = sum_up_list(sum)
             if final_sum < drink_prices_dict[digit]:
