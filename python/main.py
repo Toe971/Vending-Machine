@@ -50,9 +50,17 @@ drinks_dict = {
     "drink_three": drinks_list[2]
 }
 
+def vending_logic():
+    kp = keypad()
+    flag = False
+    digit = None
+    print("Press A, B, C, D to select 10 cents, 20 cents, 50 cents and 1 dollar respectively.")
+    while flag != True:
+        digit = kp.getKey()
+        print(digit)   
 
 """ Setup keypad"""
-kp = keypad()
+
 
 try:
     while True:
