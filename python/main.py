@@ -92,6 +92,7 @@ def vending_logic():
         time.sleep(0.3)
         if digit in coin_alphabet:
             sum.append(coin_alphabet_dict[digit])
+            print(sum)
             accumulated_sum = sum_up_list(sum)
             if accumulated_sum < 70:
                 print("Not enough coins deposited yet.")
