@@ -4,7 +4,7 @@ from influxdb_client.client.write_api import ASYNCHRONOUS
 import pandas as pd
 import numpy as np
 
-# import keyboard module in same directory
+# import keypad class from keyboard.py in same directory
 from keyboard import keypad
 
 
@@ -18,16 +18,25 @@ _client = InfluxDBClient(url="http://localhost:8086",
                          token=f"{InfluxDB_ID}:{InfluxDB_PWD}", org=f"{InfluxDB_ORG}")
 _write_client = _client.write_api(write_options=WriteOptions(ASYNCHRONOUS))
 _query_api = _client.query_api()
-# equivalent to SELECT * FROM coins and get the most recent values
+# equivalent to USE coins, SELECT * FROM total_coins and get the most recent values for the last 30 days
 query_coins = """
 from(bucket: "coins/autogen")
   |> range(start: -30d)
   |> filter(fn: (r) => r._measurement == "total_coins")
   |> last()
 """
-
 coins_dataframe = _query_api.query_data_frame(query_coins)
 print(coins_dataframe)
+query_drinks = """
+from(bucket: "coins/autogen")
+  |> range(start: -30d)
+  |> filter(fn: (r) => r._measurement == "total_drinks")
+  |> last()
+"""
+drinks_dataframe = _query_api.query_data_frame(query_drinks)
+print(drinks_dataframe)
+
+
 """ Setup keypad"""
 kp = keypad()
 
