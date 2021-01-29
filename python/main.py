@@ -1,6 +1,8 @@
 # import influxdb
 from influxdb_client import InfluxDBClient, Point, WriteOptions, WriteApi
 from influxdb_client.client.write_api import ASYNCHRONOUS
+import pandas as pd
+import numpy as np
 
 # import keyboard module in same directory
 import keyboard
