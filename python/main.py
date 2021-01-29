@@ -31,10 +31,10 @@ coins_list = coins_dataframe['_value'].to_list()
 print(coins_list)
 # coin_dict has the quantity of coins left
 coin_dict = {
-    "ten_cents": coins_list[0],
-    "twenty_cents": coins_list[1],
-    "fifty_cents": coins_list[2],
-    "one_dollar": coins_list[3]
+    "ten_cents": coins_list[2],
+    "twenty_cents": coins_list[3],
+    "fifty_cents": coins_list[0],
+    "one_dollar": coins_list[1]
 }
 
 query_drinks = """
@@ -50,8 +50,8 @@ print(drinks_list)
 # drinks_dict has the quantity of drinks left
 drinks_dict = {
     "drink_one": drinks_list[0],
-    "drink_two": drinks_list[1],
-    "drink_three": drinks_list[2]
+    "drink_two": drinks_list[2],
+    "drink_three": drinks_list[1]
 }
 
 def vending_logic():
@@ -102,9 +102,34 @@ def vending_logic():
             elif accumulated_sum >= 120:
                 print("Sum is enough for all drinks!")
         if digit in drink_digits:
+            final_sum = sum_up_list(sum)
+            if final_sum < drink_prices_dict[digit]:
+                print("Not enough deposited for the selected drink!")
+                break
             for i in sum:
-                if sum == 10:
-                    pass
+                if i == 10:
+                    coins_list[2] += 1
+                elif i == 20:
+                    coins_list[3] += 1
+                elif i == 50:
+                    coins_list[0] += 1
+                elif i == 100:
+                    coins_list[1] += 1
+                sum.pop(i)
+            if len(sum) != 0:
+                print('Dispensing change...')
+                for i in sum:
+                    if i == 10:
+                        coins_list[2] -= 1
+                    elif i == 20:
+                        coins_list[3] -= 1
+                    elif i == 50:
+                        coins_list[0] -= 1
+                    elif i == 100:
+                        coins_list[1] -= 1
+                    sum.pop(i)
+
+                    
 
             print(f"Dispensing drink{digit}...")
 
