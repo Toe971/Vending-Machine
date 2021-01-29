@@ -24,7 +24,7 @@ from(bucket: "coins/autogen")
   |> last()
 """
 
-coins_dataframe = _query_api.query_dataframe(query_coins)
+coins_dataframe = _query_api.query_data_frame(query_coins)
 print(coins_dataframe)
 """ Setup keypad"""
 kp = keypad()
