@@ -27,7 +27,7 @@ from(bucket: "coins/autogen")
 """
 coins_dataframe = _query_api.query_data_frame(query_coins)
 print(coins_dataframe.to_string())
-print(coins_dataframe.loc[:, '_values'])
+print(coins_dataframe[['_values']])
 
 query_drinks = """
 from(bucket: "coins/autogen")
