@@ -9,6 +9,7 @@ To install system-wide the required python dependencies:
 
 ```
 sudo pip3 install adafruit-circuitpython-matrixkeypad
+```
 
 ## Available Scripts
 
@@ -76,4 +77,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+```
+
 ```
