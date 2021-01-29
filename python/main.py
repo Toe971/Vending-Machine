@@ -26,10 +26,8 @@ from(bucket: "coins/autogen")
   |> last()
 """
 coins_dataframe = _query_api.query_data_frame(query_coins)
-print(coins_dataframe)
-for row in coins_dataframe:
-    for column in row:
-        print(column)
+print(coins_dataframe.to_string())
+
 
 query_drinks = """
 from(bucket: "coins/autogen")
@@ -38,7 +36,7 @@ from(bucket: "coins/autogen")
   |> last()
 """
 drinks_dataframe = _query_api.query_data_frame(query_drinks)
-print(drinks_dataframe)
+print(drinks_dataframe.to_string())
 
 
 """ Setup keypad"""
