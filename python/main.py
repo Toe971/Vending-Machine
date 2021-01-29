@@ -26,7 +26,7 @@ from(bucket: "coins/autogen")
   |> last()
 """
 coins_dataframe = _query_api.query_data_frame(query_coins)
-""" print(coins_dataframe.to_string()) """
+print(coins_dataframe.to_string())
 coins_list = coins_dataframe['_value'].to_list()
 print(coins_list)
 # coin_dict has the quantity of coins left
@@ -44,7 +44,7 @@ from(bucket: "coins/autogen")
   |> last()
 """
 drinks_dataframe = _query_api.query_data_frame(query_drinks)
-""" print(drinks_dataframe.to_string()) """
+print(drinks_dataframe.to_string())
 drinks_list = drinks_dataframe['_value'].to_list()
 print(drinks_list)
 # drinks_dict has the quantity of drinks left
