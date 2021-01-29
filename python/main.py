@@ -27,6 +27,10 @@ from(bucket: "coins/autogen")
 """
 coins_dataframe = _query_api.query_data_frame(query_coins)
 print(coins_dataframe)
+for row in coins_dataframe:
+    for column in row:
+        print(column)
+
 query_drinks = """
 from(bucket: "coins/autogen")
   |> range(start: -30d)
