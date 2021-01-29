@@ -64,7 +64,7 @@ def vending_logic():
 
 try:
     while True:
-        pass
+        vending_logic()
 except KeyboardInterrupt:
     _client.__del__()
     print('Exiting...')
