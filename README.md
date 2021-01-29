@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# Vending Machine Prototype
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and also
+[Adafruit CircuitPython](https://github.com/adafruit/circuitpython)
+
+## Python Dependencies
+
+To install system-wide the required python dependencies:
+
+```
+sudo pip3 install adafruit-circuitpython-matrixkeypad
 
 ## Available Scripts
 
@@ -68,3 +76,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
