@@ -16,8 +16,16 @@ _client = InfluxDBClient(url="http://localhost:8086",
                          token=f"{InfluxDB_ID}:{InfluxDB_PWD}", org=f"{InfluxDB_ORG}")
 _write_client = _client.write_api(write_options=WriteOptions(ASYNCHRONOUS))
 _query_api = _client.query_api()
-query_coins = "SELECT "
-coins_dict = 1
+# equivalent to SELECT * FROM coins and get the most recent values
+query_coins = """
+from(bucket: "coins/autogen")
+  |> range(start: -30d)
+  |> filter(fn: (r) => r._measurement == "total_coins")
+  |> last()
+"""
+
+coins_dataframe = _query_api.query_dataframe(query_coins)
+print(coins_dataframe)
 """ Setup keypad"""
 kp = keypad()
 
