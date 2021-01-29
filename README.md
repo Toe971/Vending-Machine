@@ -10,10 +10,23 @@ We are using not using InfluxDB 2.0+ and above for this vending machine demo as 
 functionality for open source buckets.
 See [https://docs.influxdata.com/influxdb/v1.8/administration/config/](https://docs.influxdata.com/influxdb/v1.8/administration/config/) on how to set up environment variables and edit InfluxDB.
 Launch InfluxDB's command line interface in the bash terminal of your choice with
+
 ```bash
-influx -rfc3339
+influx -precision rfc3339
 ```
 
+Then, create a database named coins. For more information, visit [https://docs.influxdata.com/influxdb/v1.8/query_language/manage-database/](https://docs.influxdata.com/influxdb/v1.8/query_language/manage-database/)
+Enter the following code into the InfluxDB CLI:
+
+```
+CREATE DATABASE coins
+```
+
+finally, enter exit to quit the CLI.
+
+```
+exit
+```
 
 ## Python Dependencies
 
