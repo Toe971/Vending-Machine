@@ -27,7 +27,13 @@ from(bucket: "coins/autogen")
 """
 coins_dataframe = _query_api.query_data_frame(query_coins)
 print(coins_dataframe.to_string())
-print(coins_dataframe['_value'].to_list())
+coins_list = coins_dataframe['_value'].to_list()
+coin_dict = {
+    "ten_cents": coins_list[0],
+    "twenty_cents": coins_list[1],
+    "fifty_cents": coins_list[2],
+    "one_dollar": coins_list[3]
+}
 
 query_drinks = """
 from(bucket: "coins/autogen")
@@ -37,6 +43,12 @@ from(bucket: "coins/autogen")
 """
 drinks_dataframe = _query_api.query_data_frame(query_drinks)
 print(drinks_dataframe.to_string())
+drinks_list = drinks_dataframe['_value'].to_list()
+drinks_dict = {
+    "drink_one": drinks_list[0],
+    "drink_two": drinks_list[1],
+    "drink_three": drinks_list[2]
+}
 
 
 """ Setup keypad"""
