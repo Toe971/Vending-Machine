@@ -2,10 +2,11 @@ import RPi.GPIO as GPIO
 import time
  
 class keypad():
-    # CONSTANTS   
+    # CONSTANTS
+    # swapped row A and B due to position of my pins. Fix in the future   
     KEYPAD = [
-    [1,2,3,"A"],
     [4,5,6,"B"],
+    [1,2,3,"A"],
     [7,8,9,"C"],
     ["*",0,"#","D"]
     ]

@@ -56,8 +56,10 @@ def vending_logic():
     digit = None
     print("Press A, B, C, D to select 10 cents, 20 cents, 50 cents and 1 dollar respectively.")
     while flag != True:
+        sum = 0
         digit = kp.getKey()
-        print(digit)   
+        if digit:
+
 
 """ Setup keypad"""
 
