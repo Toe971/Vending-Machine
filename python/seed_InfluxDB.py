@@ -3,10 +3,10 @@ from influxdb_client.client.write_api import ASYNCHRONOUS
 
 # coin_dict are going to be the measurements
 coin_dict = {
-    "10": 1000,
-    "20": 1000,
-    "50": 1000,
-    "100": 1000
+    "ten_cents": 1000,
+    "twenty_cents": 1000,
+    "fifty_cents": 1000,
+    "one_dollar": 1000
 }
 
 drinks_dict = {

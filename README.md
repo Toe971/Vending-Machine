@@ -3,12 +3,17 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and also
 [Adafruit CircuitPython](https://github.com/adafruit/circuitpython)
 
-## Installing InfluxDB
+## Installing and setup for InfluxDB
 
-Go to [https://github.com/influxdata/influxdb-client-python](https://github.com/influxdata/influxdb-client-python) and follow the installation guide.\
+Go to [https://github.com/influxdata/influxdb-client-python](https://github.com/influxdata/influxdb-client-python) and follow the installation guide.
 We are using not using InfluxDB 2.0+ and above for this vending machine demo as it has a pricing plan, and limited
-functionality for open source buckets.\
-See [https://docs.influxdata.com/influxdb/v1.8/administration/config/](https://docs.influxdata.com/influxdb/v1.8/administration/config/) on how to set up environment variables and edit InfluxDB\
+functionality for open source buckets.
+See [https://docs.influxdata.com/influxdb/v1.8/administration/config/](https://docs.influxdata.com/influxdb/v1.8/administration/config/) on how to set up environment variables and edit InfluxDB.
+Launch InfluxDB's command line interface in the bash terminal of your choice with
+```bash
+influx -rfc3339
+```
+
 
 ## Python Dependencies
 
