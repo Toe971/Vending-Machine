@@ -78,8 +78,11 @@ def vending_logic():
         return sum
 
     sum_list = []
+    sum_dict = {}
+    # set sum_dict as {10: 0, 20: 0, 50: 0, 100: 0}
+    for i in coin_integer:
+        sum_dict[i] = 0
     accumulated_sum = 0
-    change = 0
     # if drink_three_bool is 1, means that can pay for all drinks
     drink_one_bool = 0
     drink_two_bool = 0
@@ -93,6 +96,7 @@ def vending_logic():
         # maybe need to use global drink_one_bool etc.
         if digit in coin_alphabet:
             sum_list.append(coin_alphabet_dict[digit])
+            sum_dict[coin_alphabet_dict[digit]] += 1
             print(sum_list)
             accumulated_sum += coin_alphabet_dict[digit]
             print(accumulated_sum)
@@ -109,13 +113,39 @@ def vending_logic():
                 drink_three_bool += 1
         # when user presses purchase button i.e. 1, 2, 3
         if digit in drink_digits:
+            cost_drink = drink_prices_dict[digit]
             final_sum = sum_up_list(sum_list)
-            if final_sum < drink_prices_dict[digit]:
+            print(sum_dict)
+            if final_sum < cost_drink:
                 print("Not enough deposited for the selected drink!")
             else:
                 # deduct the dispensed drink from drinks_list
                 # add logic here
-                change = 0
+                # add logic to dispense change
+                # first case: coins that users input, change can be found from the coins user has input
+                # e.g. user_input = [20, 10, 50, 10, 50] == 130 and select drink of 70 cents, 140 - 70 = 70
+                # can return 20, 50 or 10, 50, 10 as change
+                # second case 
+                # user_input = [50, 50] cost_drink = 70, we have to deduct from overall amount of change FROM the machine
+                # third case
+                # change is just enough 
+                # user_input = [50, 20], cost_drink = 70
+                # return tuple, (1, amount of change) for success (0, amount of change) to further process
+                # for (1, 0) i.e. subset of success, do not need to add to coins_list
+                # set value = 0 \n for i in user_input: \n \t change_sum += i
+
+                def return_change(sum_list, cost_drink, final_sum):
+                    # sort sum_list
+                    sum_list.sort(reverse=True)
+                    # define a recursive function?
+                    change = final_sum - cost_drink
+                    
+                    
+                   
+                            
+
+                        
+                        
                 for i in sum:
                     if i == 10:
                         coins_list[0] += 1
@@ -141,7 +171,7 @@ def vending_logic():
 
                     
 
-            print(f"Dispensing drink{digit}...")
+            print(f"Dispensing drink_{digit}...")
 
 
 
