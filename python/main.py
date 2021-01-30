@@ -202,26 +202,26 @@ def vending_button_logic():
                     if change == 0:
                         return change_to_give
                     if change >= 100 and sum_dict['one_dollar'] >= 1:
-                        sum_dict[100] -= 1
+                        sum_dict['one_dollar'] -= 1
                         change_to_give[100] += 1
                         change -= 100
                         algorithm(change, sum_dict)
                     else:
                         if change >= 50 and sum_dict['fifty_cents'] >= 1:
-                            sum_dict[50] -= 1
+                            sum_dict['fifty_cents']-= 1
                             change_to_give[50] += 1
                             change -= 50
                             algorithm(change, sum_dict)
                         else:
                             if change >= 20 and sum_dict['twenty_cents'] >= 1:
-                                sum_dict[20] -= 1
+                                sum_dict['twenty_cents'] -= 1
                                 change_to_give[20] += 1
                                 change -= 20
                                 algorithm(change, sum_dict)
                             else:
 
                                 if change >= 10 and sum_dict['ten_cents'] >= 1:
-                                    sum_dict[10] -= 1
+                                    sum_dict['ten_cents'] -= 1
                                     change_to_give[10] += 1
                                     change -= 10
                                     algorithm(change, sum_dict)
@@ -260,6 +260,7 @@ def vending_button_logic():
                                                     }])
 
                 print(f"Dispensing drink_{digit}...")
+                print(f"Dispensing change of {}")
                 # reset sum_dict
                 sum_dict = {10: 0, 20: 0, 50: 0, 100: 0}
                 accumulated_sum = 0
