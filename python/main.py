@@ -1,4 +1,4 @@
-# import influxdb
+# import influxdb, and related libraries
 from influxdb_client import InfluxDBClient, Point, WriteOptions, WriteApi
 from influxdb_client.client.write_api import ASYNCHRONOUS
 import pandas as pd
@@ -7,6 +7,13 @@ import numpy as np
 # import keypad class from keyboard.py in same directory
 from keyboard import keypad
 import time
+
+# for websocket
+import asyncio
+import datetime
+import websockets
+import json
+
 
 """ Setup InfluxDB client """
 InfluxDB_ID = ""

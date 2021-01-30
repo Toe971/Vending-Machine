@@ -40,6 +40,7 @@ To install system-wide the required python dependencies:
 sudo pip3 install adafruit-circuitpython-matrixkeypad
 sudo pip3 install pandas
 sudo apt-get install libatlas-base-dev
+sudo pip3 install websockets
 ```
 
 ## Available Scripts
