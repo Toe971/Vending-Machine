@@ -27,7 +27,7 @@ from(bucket: "coins/autogen")
 """
 coins_dataframe = _query_api.query_data_frame(query_coins)
 """ print(coins_dataframe.to_string()) """
-coins_key = coins_dataframe['_result'].to_list()
+coins_key = coins_dataframe['_field'].to_list()
 coins_list = coins_dataframe['_value'].to_list()
 coin_dict = dict(zip(coins_key, coins_list))
 print(coin_dict)
