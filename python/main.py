@@ -27,22 +27,13 @@ from(bucket: "coins/autogen")
 """
 coins_dataframe = _query_api.query_data_frame(query_coins)
 """ print(coins_dataframe.to_string()) """
+# use a better way for indexing in the future, i.e. use pd methods
 coins_key = coins_dataframe['_field'].to_list()
 coins_list = coins_dataframe['_value'].to_list()
+# shape of coin_dict: {'fifty_cents': 1000, 'one_dollar': 1000, 'ten_cents': 1000, 'twenty_cents': 1000}
 coin_dict = dict(zip(coins_key, coins_list))
 print(coin_dict)
-# '_result' is the column name for ten_cents, twenty_cents etc.
-# rearrange coins_list as returned list is fifty_cents, one_dollar, ten_cents, twenty_cents
-# so after below line, coins_list will then be ten_cents, twenty-cents... ascending
-coins_list = [coins_list[2], coins_list[3], coins_list[0], coins_list[1]]
-print(coins_list)
-# coin_dict has the quantity of coins left
-coin_dict = {
-    "ten_cents": coins_list[0],
-    "twenty_cents": coins_list[1],
-    "fifty_cents": coins_list[2],
-    "one_dollar": coins_list[3]
-}
+
 
 query_drinks = """
 from(bucket: "coins/autogen")
@@ -52,17 +43,11 @@ from(bucket: "coins/autogen")
 """
 drinks_dataframe = _query_api.query_data_frame(query_drinks)
 """ print(drinks_dataframe.to_string()) """
+drinks_key = drinks_dataframe['_field'].to_list()
 drinks_list = drinks_dataframe['_value'].to_list()
-# rearrange drinks_list as returned drinks_list is drink_one, drink_three, drink_two
-# so after below line drinks_list will be drink_one, drink_two, drink_three
-drinks_list = [drinks_list[0], drinks_list[2], drinks_list[1]]
-print(drinks_list)
-# drinks_dict has the quantity of drinks left
-drinks_dict = {
-    "drink_one": drinks_list[0],
-    "drink_two": drinks_list[1],
-    "drink_three": drinks_list[2]
-}
+drinks_dict = dict(zip(drinks_key, drinks_list))
+print(drinks_dict)
+
 
 def vending_logic():
     # REFACTOR EVERYTHING TOMORROW damn tired
