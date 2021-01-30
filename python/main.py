@@ -194,7 +194,42 @@ def vending_button_logic():
                 # if change_to_deduct is 0
                 sum_of_change_to_deduct = sum_up_dict(change_to_deduct)
                 print(sum_of_change_to_deduct)
-                x = algorithm(sum_of_change_to_deduct, coin_dict)
+                # solved the bug, previously key error is because the key in algorithm is 100, 50, 20 etc
+                # but for here is 'one_dollar"
+                def algorithmTwo(change, sum_dict):
+                    change_to_give = {10: 0, 20: 0, 50: 0, 100: 0}
+                    time.sleep(0.2)
+                    if change == 0:
+                        return change_to_give
+                    if change >= 100 and sum_dict['one_dollar'] >= 1:
+                        sum_dict[100] -= 1
+                        change_to_give[100] += 1
+                        change -= 100
+                        algorithm(change, sum_dict)
+                    else:
+                        if change >= 50 and sum_dict['fifty_cents'] >= 1:
+                            sum_dict[50] -= 1
+                            change_to_give[50] += 1
+                            change -= 50
+                            algorithm(change, sum_dict)
+                        else:
+                            if change >= 20 and sum_dict['twenty_cents'] >= 1:
+                                sum_dict[20] -= 1
+                                change_to_give[20] += 1
+                                change -= 20
+                                algorithm(change, sum_dict)
+                            else:
+
+                                if change >= 10 and sum_dict['ten_cents'] >= 1:
+                                    sum_dict[10] -= 1
+                                    change_to_give[10] += 1
+                                    change -= 10
+                                    algorithm(change, sum_dict)
+                                else:
+                                    print(change)
+                                    print('End of algorithm')
+                    return change_to_give
+                algorithmTwo(sum_of_change_to_deduct, coin_dict)
                 has_coin_dict_changed = coin_dict_old != coin_dict
                 if digit == 1:
                     drinks_dict['drink_one'] -= 1
