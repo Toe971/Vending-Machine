@@ -60,7 +60,7 @@ def vending_logic():
     # alphabet are dict keys and integer are dict values
     coin_alphabet_dict = dict(zip(coin_alphabet, coin_integer))
     drink_digits = [1, 2, 3]
-    drink_prices = [70, 80, 100]
+    drink_prices = [70, 80, 120]
     # similar below
     drink_prices_dict = dict(zip(drink_digits, drink_prices))
     print("Press A, B, C, D to select 10 cents, 20 cents, 50 cents and 1 dollar respectively.")
@@ -95,6 +95,7 @@ def vending_logic():
             sum_list.append(coin_alphabet_dict[digit])
             print(sum_list)
             accumulated_sum += coin_alphabet_dict[digit]
+            print(accumulated_sum)
             if accumulated_sum < drink_prices[0]:
                 print("Not enough coins deposited yet.")
             elif accumulated_sum < drink_prices[1]:
@@ -116,7 +117,6 @@ def vending_logic():
                 # add logic here
                 change = 0
                 for i in sum:
-                    
                     if i == 10:
                         coins_list[0] += 1
                     elif i == 20:
