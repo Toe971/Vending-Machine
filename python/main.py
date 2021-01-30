@@ -122,7 +122,7 @@ def vending_logic():
             else:
                 # deduct the dispensed drink from drinks_list
                 # add logic here
-                change = 
+                change = 0
                 for i in sum:
                     if i == 10:
                         coins_list[0] += 1
