@@ -10,8 +10,8 @@ const bucket = "coins";
 const org = "";
 const token = "";
 const influxDB = new InfluxDB({
-  url,
-  token,
+  url: url,
+  token: token,
 });
 
 
@@ -24,14 +24,14 @@ const fluxQuery =
  // performs query and receive line table metadata and rows
 // https://v2.docs.influxdata.com/v2.0/reference/syntax/annotated-csv/
 queryApi.queryRows(fluxQuery, {
-  next(row: string[], tableMeta: FluxTableMetaData) {
+  next(row, tableMeta) {
     const o = tableMeta.toObject(row)
     // console.log(JSON.stringify(o, null, 2))
     console.log(
-      
+      ``
     )
   },
-  error(error: Error) {
+  error(error) {
     console.error(error)
     console.log('\nFinished ERROR')
   },
