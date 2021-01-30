@@ -191,6 +191,7 @@ def vending_button_logic():
                     drinks_dict['drink_three'] -= 1
                 if has_coin_dict_changed:
                     # write to InfluxDB both coin_dict and drinks_dict
+                    print('writing coin_dict and drinks_dict to influxdb')
                     _write_client.write(InfluxDB_BUCKET, InfluxDB_ORG, [{
                                                         "measurement": "total_coins", 
                                                         "tags": {"vending_one": "yishun"},
@@ -202,6 +203,7 @@ def vending_button_logic():
                                                         "fields": drinks_dict
                                                     }])
                 else:
+                    print('writing drinks_dict to influxdb')
                     _write_client.write(InfluxDB_BUCKET, InfluxDB_ORG, [
                                                     {
                                                         "measurement": "total_drinks", 
