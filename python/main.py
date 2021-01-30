@@ -194,7 +194,7 @@ def vending_button_logic():
                 # if change_to_deduct is 0
                 sum_of_change_to_deduct = sum_up_dict(change_to_deduct)
                 print(sum_of_change_to_deduct)
-                algorithm(sum_of_change_to_deduct, coin_dict)
+                x = algorithm(sum_of_change_to_deduct, coin_dict)
                 has_coin_dict_changed = coin_dict_old != coin_dict
                 if digit == 1:
                     drinks_dict['drink_one'] -= 1
