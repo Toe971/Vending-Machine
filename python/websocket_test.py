@@ -6,8 +6,8 @@ import random
 async def handler(websocket, path):
     data = [
         {
-            "test": 1,
-            "test2": 2
+            "test": "1",
+            "test2": "2"
         }
     ]
     await websocket.send(json.dumps(data))
