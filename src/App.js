@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-const {InfluxDB, Point} = require('@influxdata/influxdb-client')
 import './App.css';
+const {InfluxDB, Point} = require('@influxdata/influxdb-client')
+
 
 
 
