@@ -76,7 +76,7 @@ def vending_logic():
     print("Press A, B, C, D to select 10 cents, 20 cents, 50 cents and 1 dollar respectively.")
     print()
     print('Press 1 for drink_1, 2 for drink_2, 3 for drink_3')
-    print(f'Prices are: {drink_prices_dict[1]} cents, {drink_prices_dict[2]} cents, and {drink_prices_dict[3] // 100} dollar {drink_prices_dict % 100} cents respectively')
+    print(f'Prices are: {drink_prices_dict[1]} cents, {drink_prices_dict[2]} cents, and {drink_prices_dict[3] // 100} dollar {drink_prices_dict[3] % 100} cents respectively')
     # import from keyboard.py later? hardcode for now
     # refactor after feeling less tired 
 
