@@ -209,8 +209,7 @@ def vending_button_logic():
                                                         "fields": drinks_dict
                                                     }])
 
-            print(f"Dispensing drink_{digit}...")
-
+                print(f"Dispensing drink_{digit}...")
 
 
 
