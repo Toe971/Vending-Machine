@@ -28,13 +28,16 @@ from(bucket: "coins/autogen")
 coins_dataframe = _query_api.query_data_frame(query_coins)
 print(coins_dataframe.to_string())
 coins_list = coins_dataframe['_value'].to_list()
+# rearrange coins_list as returned list is fifty_cents, one_dollar, ten_cents, twenty_cents
+# so after below line, coins_list will then be ten_cents, twenty-cents... ascending
+coins_list = [coins_list[2], coins_list[3], coins_list[0], coins_list[1]]
 print(coins_list)
 # coin_dict has the quantity of coins left
 coin_dict = {
-    "ten_cents": coins_list[2],
-    "twenty_cents": coins_list[3],
-    "fifty_cents": coins_list[0],
-    "one_dollar": coins_list[1]
+    "ten_cents": coins_list[0],
+    "twenty_cents": coins_list[1],
+    "fifty_cents": coins_list[2],
+    "one_dollar": coins_list[3]
 }
 
 query_drinks = """
@@ -46,12 +49,15 @@ from(bucket: "coins/autogen")
 drinks_dataframe = _query_api.query_data_frame(query_drinks)
 print(drinks_dataframe.to_string())
 drinks_list = drinks_dataframe['_value'].to_list()
+# rearrange drinks_list as returned drinks_list is drink_one, drink_three, drink_two
+# so after below line drinks_list will be drink_one, drink_two, drink_three
+drinks_list = [drinks_list[0], drinks_list[2], drinks_list[1]]
 print(drinks_list)
 # drinks_dict has the quantity of drinks left
 drinks_dict = {
     "drink_one": drinks_list[0],
-    "drink_two": drinks_list[2],
-    "drink_three": drinks_list[1]
+    "drink_two": drinks_list[1],
+    "drink_three": drinks_list[2]
 }
 
 def vending_logic():
@@ -59,26 +65,22 @@ def vending_logic():
     kp = keypad()
     flag = False
     digit = None
+    coin_alphabet = ["A", "B", "C", "D"]
+    coin_integer = [10, 20, 50, 100]
+    # alphabet are dict keys and integer are dict values
+    coin_alphabet_dict = dict(zip(coin_alphabet, coin_integer))
+    drink_digits = [1, 2, 3]
+    drink_prices = [70, 80, 100]
+    # similar below
+    drink_prices_dict = dict(zip(drink_digits, drink_prices))
     print("Press A, B, C, D to select 10 cents, 20 cents, 50 cents and 1 dollar respectively.")
     print()
     print('Press 1 for drink_1, 2 for drink_2, 3 for drink_3')
-    print('Prices are: 70 cents, 80 cents, and 1 dollar 20 cents respectively')
+    print(f'Prices are: {drink_prices_dict[1]} cents, {drink_prices_dict[2]} cents, and {drink_prices_dict[3] // 100} dollar {drink_prices_dict % 100} cents respectively')
     # import from keyboard.py later? hardcode for now
     # refactor after feeling less tired 
-    coin_alphabet = ["A", "B", "C", "D"]
-    coin_alphabet_dict = {
-        "A": 10,
-        "B": 20,
-        "C": 50,
-        "D": 100
-    }
-    drink_digits = [1, 2, 3]
-    drink_prices_dict = {
-        1: 70, 
-        2: 80, 
-        3: 120
-    }
 
+    # helper function to sum up coins inputted so far
     def sum_up_list(list):
         sum = 0
         for i in list:
@@ -87,14 +89,16 @@ def vending_logic():
 
     sum = []
     accumulated_sum = 0
+    change = 0
     # if drink_three_bool is 1, means that can pay for all drinks
     drink_one_bool = 0
     drink_two_bool = 0
     drink_three_bool = 0
     while flag != True:
-        
         digit = kp.getKey()
         time.sleep(0.3)
+        # for now bool will keep adding += 1 whenever user inputs more than needed i.e. if add till 2 dollars
+        # need to change the logic if not remove the flag, or instead of += just assign i.e. = 
         if digit in coin_alphabet:
             sum.append(coin_alphabet_dict[digit])
             print(sum)
@@ -110,33 +114,37 @@ def vending_logic():
             elif accumulated_sum >= 120:
                 print("Sum is enough for all drinks!")
                 drink_three_bool += 1
+        # when user presses purchase button i.e. 1, 2, 3
         if digit in drink_digits:
             final_sum = sum_up_list(sum)
             if final_sum < drink_prices_dict[digit]:
                 print("Not enough deposited for the selected drink!")
-                break
-            for i in sum:
-                if i == 10:
-                    coins_list[2] += 1
-                elif i == 20:
-                    coins_list[3] += 1
-                elif i == 50:
-                    coins_list[0] += 1
-                elif i == 100:
-                    coins_list[1] += 1
-                sum.pop(i)
-            if len(sum) != 0:
-                print('Dispensing change...')
+            else:
+                # deduct the dispensed drink from drinks_list
+                # add logic here
+                change = 
                 for i in sum:
                     if i == 10:
-                        coins_list[2] -= 1
+                        coins_list[0] += 1
                     elif i == 20:
-                        coins_list[3] -= 1
+                        coins_list[1] += 1
                     elif i == 50:
-                        coins_list[0] -= 1
+                        coins_list[2] += 1
                     elif i == 100:
-                        coins_list[1] -= 1
+                        coins_list[3] += 1
                     sum.pop(i)
+                if len(sum) != 0:
+                    print('Dispensing change...')
+                    for i in sum:
+                        if i == 10:
+                            coins_list[0] -= 1
+                        elif i == 20:
+                            coins_list[1] -= 1
+                        elif i == 50:
+                            coins_list[2] -= 1
+                        elif i == 100:
+                            coins_list[3] -= 1
+                        sum.pop(i)
 
                     
 
