@@ -3,16 +3,16 @@ const {InfluxDB, Point} = require('@influxdata/influxdb-client')
 import './App.css';
 
 
-const fetchData = (setMethod, setFetching) => {
-  const url = "http://localhost:8086";
-  const bucket = "coins";
-  const org = "";
-  const token = "";
-  const influxDB = new InfluxDB({
-    url,
-    token,
-  });
-}
+
+const url = "http://localhost:8086";
+const bucket = "coins";
+const org = "";
+const token = "";
+const influxDB = new InfluxDB({
+  url,
+  token,
+});
+
 
 const queryApi = influxDB.getQueryApi(org)
 const fluxQuery =
