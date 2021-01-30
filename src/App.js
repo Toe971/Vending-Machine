@@ -2,9 +2,17 @@ import React, { useEffect, useState } from 'react';
 const {InfluxDB, Point} = require('@influxdata/influxdb-client')
 import './App.css';
 
-const axios = require('axios');
+
+const fetchData = (setMethod, setFetching) => {
+  const url = "http://localhost:8086";
+  const bucket = "coins";
+  const org = "";
+  const token = "";
+  const influxDB = new InfluxDB({
+    url,
+    token,
+  });
 const queryApi = influxDB.getQueryApi(org)
-const bucket = "coins"
 const fluxQuery =
  `from(bucket: ${bucket}/autogen)
  |> range(start: -30d)
