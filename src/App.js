@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import {InfluxDB, Point} from 'https://unpkg.com/@influxdata/influxdb-client/dist/index.browser.mjs'
 import './App.css';
 
 const axios = require('axios');
