@@ -4,14 +4,15 @@ import websockets
 import json
 import random
 async def handler(websocket, path):
-    data = [
-        {
-            "test": "1",
-            "test2": "2"
-        }
-    ]
-    await websocket.send(json.dumps(data))
-    await asyncio.sleep(1)
+    while True:
+        data = [
+            {
+                "test": "1",
+                "test2": "2"
+            }
+        ]
+        await websocket.send(json.dumps(data))
+        await asyncio.sleep(1)
 
 
 loop = asyncio.get_event_loop()
