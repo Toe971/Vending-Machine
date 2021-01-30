@@ -46,6 +46,7 @@ drinks_dataframe = _query_api.query_data_frame(query_drinks)
 drinks_key = drinks_dataframe['_field'].to_list()
 drinks_list = drinks_dataframe['_value'].to_list()
 drinks_dict = dict(zip(drinks_key, drinks_list))
+# shape of drinks_dict: {'drink_one': 50, 'drink_three': 50, 'drink_two': 50}
 print(drinks_dict)
 
 
@@ -76,7 +77,7 @@ def vending_logic():
             sum += i
         return sum
 
-    sum = []
+    sum_list = []
     accumulated_sum = 0
     change = 0
     # if drink_three_bool is 1, means that can pay for all drinks
@@ -88,24 +89,26 @@ def vending_logic():
         time.sleep(0.3)
         # for now bool will keep adding += 1 whenever user inputs more than needed i.e. if add till 2 dollars
         # need to change the logic if not remove the flag, or instead of += just assign i.e. = 
+        # seems that assign will not be in scope, as the bool is defined inside the function
+        # maybe need to use global drink_one_bool etc.
         if digit in coin_alphabet:
-            sum.append(coin_alphabet_dict[digit])
-            print(sum)
-            accumulated_sum = sum_up_list(sum)
-            if accumulated_sum < 70:
+            sum_list.append(coin_alphabet_dict[digit])
+            print(sum_list)
+            accumulated_sum += coin_alphabet_dict[digit]
+            if accumulated_sum < drink_prices[0]:
                 print("Not enough coins deposited yet.")
-            elif accumulated_sum < 80:
+            elif accumulated_sum < drink_prices[1]:
                 print("Sum is enough for drink_1")
                 drink_one_bool += 1
-            elif accumulated_sum < 120:
+            elif accumulated_sum < drink_prices[2]:
                 print("Sum is enough for drink_2")
                 drink_two_bool += 1
-            elif accumulated_sum >= 120:
+            elif accumulated_sum >= drink_prices[2]:
                 print("Sum is enough for all drinks!")
                 drink_three_bool += 1
         # when user presses purchase button i.e. 1, 2, 3
         if digit in drink_digits:
-            final_sum = sum_up_list(sum)
+            final_sum = sum_up_list(sum_list)
             if final_sum < drink_prices_dict[digit]:
                 print("Not enough deposited for the selected drink!")
             else:
@@ -113,6 +116,7 @@ def vending_logic():
                 # add logic here
                 change = 0
                 for i in sum:
+                    
                     if i == 10:
                         coins_list[0] += 1
                     elif i == 20:
