@@ -73,8 +73,8 @@ def vending_button_logic():
     # helper function to sum up coins inputted so far
     def sum_up_dict(dict):
         sum = 0
-        for keys in dict:
-            sum += dict[keys]
+        for key in dict:
+            sum += dict[key] * key
         return sum
 
     sum_dict = {}
