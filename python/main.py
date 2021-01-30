@@ -223,6 +223,8 @@ def vending_button_logic():
                                                     }])
 
                 print(f"Dispensing drink_{digit}...")
+                # reset sum_dict
+                sum_dict = {10: 0, 20: 0, 50: 0, 100: 0}
 
 
 
