@@ -76,6 +76,12 @@ def vending_logic():
         for i in list:
             sum += i
         return sum
+    
+    def sum_up_dict(dict):
+        sum = 0
+        for keys in dict:
+            sum += dict[keys]
+        return sum
 
     sum_list = []
     sum_dict = {}
@@ -97,6 +103,7 @@ def vending_logic():
         if digit in coin_alphabet:
             sum_list.append(coin_alphabet_dict[digit])
             sum_dict[coin_alphabet_dict[digit]] += 1
+            print(sum_dict)
             print(sum_list)
             accumulated_sum += coin_alphabet_dict[digit]
             print(accumulated_sum)
