@@ -1,8 +1,6 @@
 import asyncio
-import datetime
 import websockets
 import json
-import random
 async def handler(websocket, path):
     while True:
         data = [
