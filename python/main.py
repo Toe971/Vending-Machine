@@ -138,9 +138,44 @@ def vending_logic():
                 # for (1, 0) i.e. subset of success, do not need to add to coins_list
                 # set value = 0 \n for i in user_input: \n \t change_sum += i
 
-                def return_change(sum_dict, cost_drink, final_sum):
+                def vending_machine(sum_dict, cost_drink, final_sum):
                     # define a recursive function?
+                    change_to_give = {10: 0, 20: 0, 50: 0, 100: 0}
+                    change_to_deduct = {10: 0, 20: 0, 50: 0, 100: 0}
                     change = final_sum - cost_drink
+                    def algorithm(change):
+                        if change == 0:
+                            return change_to_give
+                        if change >= 100 and sum_dict[100] >= 1:
+                            sum_dict[100] -= 1
+                            change_to_give[100] += 1
+                            change -= 100
+                            algorithm(change)
+                        else:
+                            if change >= 50 and sum_dict[50] >= 1:
+                                sum_dict[50] -= 1
+                                change_to_give[50] += 1
+                                change -= 50
+                                algorithm(change)
+                            else:
+                                if change >= 20 and sum_dict[20] >= 1:
+                                    sum_dict[20] -= 1
+                                    change_to_give[20] += 1
+                                    change -= 20
+                                    algorithm(change)
+                                else:
+                                    if change >= 10 and sum_dict[10] >= 1:
+                                        sum_dict[10] -= 1
+                                        change_to_give[10] += 1
+                                        change -= 10
+                                        algorithm(change)
+                                    else:
+                                        print(change)
+                                        print('End of algorithm')
+                        return change_to_give
+                            
+
+
                     
                     
                    
