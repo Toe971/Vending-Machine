@@ -116,6 +116,7 @@ def vending_button_logic():
             final_sum = sum_up_dict(sum_dict)
             print(cost_drink)
             print(sum_dict)
+            print(final_sum)
             if final_sum < cost_drink:
                 print("Not enough deposited for the selected drink!")
             else:
