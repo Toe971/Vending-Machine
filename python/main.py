@@ -83,7 +83,6 @@ def vending_logic():
             sum += dict[keys]
         return sum
 
-    sum_list = []
     sum_dict = {}
     # set sum_dict as {10: 0, 20: 0, 50: 0, 100: 0}
     for i in coin_integer:
@@ -101,10 +100,8 @@ def vending_logic():
         # seems that assign will not be in scope, as the bool is defined inside the function
         # maybe need to use global drink_one_bool etc.
         if digit in coin_alphabet:
-            sum_list.append(coin_alphabet_dict[digit])
             sum_dict[coin_alphabet_dict[digit]] += 1
             print(sum_dict)
-            print(sum_list)
             accumulated_sum += coin_alphabet_dict[digit]
             print(accumulated_sum)
             if accumulated_sum < drink_prices[0]:
@@ -121,7 +118,7 @@ def vending_logic():
         # when user presses purchase button i.e. 1, 2, 3
         if digit in drink_digits:
             cost_drink = drink_prices_dict[digit]
-            final_sum = sum_up_list(sum_list)
+            final_sum = sum_up_dict(sum_dict)
             print(sum_dict)
             if final_sum < cost_drink:
                 print("Not enough deposited for the selected drink!")
@@ -141,9 +138,7 @@ def vending_logic():
                 # for (1, 0) i.e. subset of success, do not need to add to coins_list
                 # set value = 0 \n for i in user_input: \n \t change_sum += i
 
-                def return_change(sum_list, cost_drink, final_sum):
-                    # sort sum_list
-                    sum_list.sort(reverse=True)
+                def return_change(sum_dict, cost_drink, final_sum):
                     # define a recursive function?
                     change = final_sum - cost_drink
                     
