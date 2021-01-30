@@ -12,6 +12,8 @@ const fetchData = (setMethod, setFetching) => {
     url,
     token,
   });
+}
+
 const queryApi = influxDB.getQueryApi(org)
 const fluxQuery =
  `from(bucket: ${bucket}/autogen)
