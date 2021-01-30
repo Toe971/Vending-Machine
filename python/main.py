@@ -50,7 +50,7 @@ drinks_dict = dict(zip(drinks_key, drinks_list))
 print(drinks_dict)
 
 
-def vending_logic():
+def vending_button_logic():
     # REFACTOR EVERYTHING TOMORROW damn tired
     kp = keypad()
     flag = False
@@ -118,6 +118,7 @@ def vending_logic():
         # when user presses purchase button i.e. 1, 2, 3
         if digit in drink_digits:
             cost_drink = drink_prices_dict[digit]
+            # final sum is the value of coins put in thus far
             final_sum = sum_up_dict(sum_dict)
             print(sum_dict)
             if final_sum < cost_drink:
@@ -134,9 +135,6 @@ def vending_logic():
                 # third case
                 # change is just enough 
                 # user_input = [50, 20], cost_drink = 70
-                # return tuple, (1, amount of change) for success (0, amount of change) to further process
-                # for (1, 0) i.e. subset of success, do not need to add to coins_list
-                # set value = 0 \n for i in user_input: \n \t change_sum += i
 
                 def vending_machine(sum_dict, cost_drink, final_sum):
                     # define a recursive function?
@@ -173,7 +171,8 @@ def vending_logic():
                                         print(change)
                                         print('End of algorithm')
                         return change_to_give
-                            
+                    algorithm(change)
+                vending_machine(sum_dict, cost_drink, final_sum)
 
 
                     
@@ -218,7 +217,7 @@ def vending_logic():
 
 try:
     while True:
-        vending_logic()
+        vending_button_logic()
 except KeyboardInterrupt:
     _client.__del__()
     print('Exiting...')
