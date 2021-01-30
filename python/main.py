@@ -168,6 +168,7 @@ def vending_button_logic():
                                 algorithm(change, sum_dict)
                             else:
                                 stack += 1
+                                print(stack)
                                 if change >= 10 and sum_dict[10] >= 1:
                                     sum_dict[10] -= 1
                                     change_to_give[10] += 1
