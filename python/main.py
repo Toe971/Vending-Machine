@@ -145,6 +145,7 @@ def vending_button_logic():
  
                 def algorithm(change, sum_dict):
                     change_to_give = {10: 0, 20: 0, 50: 0, 100: 0}
+                    time.sleep(0.2)
                     if change == 0:
                         return change_to_give
                     if change >= 100 and sum_dict[100] >= 1:
