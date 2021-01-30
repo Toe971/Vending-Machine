@@ -39,7 +39,7 @@ coins_key = coins_dataframe['_field'].to_list()
 coins_list = coins_dataframe['_value'].to_list()
 # shape of coin_dict: {'fifty_cents': 1000, 'one_dollar': 1000, 'ten_cents': 1000, 'twenty_cents': 1000}
 coin_dict = dict(zip(coins_key, coins_list))
-print(coin_dict)
+""" print(coin_dict) """
 
 
 query_drinks = """
@@ -54,7 +54,7 @@ drinks_key = drinks_dataframe['_field'].to_list()
 drinks_list = drinks_dataframe['_value'].to_list()
 drinks_dict = dict(zip(drinks_key, drinks_list))
 # shape of drinks_dict: {'drink_one': 50, 'drink_three': 50, 'drink_two': 50}
-print(drinks_dict)
+""" print(drinks_dict) """
 
 
 def vending_button_logic():
@@ -121,11 +121,14 @@ def vending_button_logic():
             cost_drink = drink_prices_dict[digit]
             # final sum is the value of coins put in thus far
             final_sum = sum_up_dict(sum_dict)
+            print('The cost of the drink is:')
             print(cost_drink)
-            print(sum_dict)
-            print(final_sum)
+            """ print()
+            print(sum_dict) """
+            """ print()
+            print(final_sum) """
             if final_sum < cost_drink:
-                print("Not enough deposited for the selected drink!")
+                print("Not enough deposited for the selected drink!\n")
             else:
                 # deduct the dispensed drink from drinks_list
                 # add logic here
@@ -227,7 +230,7 @@ def vending_button_logic():
                                     algorithm(change, sum_dict)
                                 else:
                                     print(change)
-                                    print('End of algorithm')
+                                    print('End of algorithm\n')
                     return change_to_give
                 algorithmTwo(sum_of_change_to_deduct, coin_dict)
                 has_coin_dict_changed = coin_dict_old != coin_dict
@@ -239,7 +242,7 @@ def vending_button_logic():
                     drinks_dict['drink_three'] -= 1
                 if has_coin_dict_changed:
                     # write to InfluxDB both coin_dict and drinks_dict
-                    print('writing coin_dict and drinks_dict to influxdb')
+                    print('writing coin_dict and drinks_dict to influxdb...\n See Chronograf for more details')
                     _write_client.write(InfluxDB_BUCKET, InfluxDB_ORG, [{
                                                         "measurement": "total_coins", 
                                                         "tags": {"vending_one": "yishun"},
@@ -251,7 +254,7 @@ def vending_button_logic():
                                                         "fields": drinks_dict
                                                     }])
                 else:
-                    print('writing drinks_dict to influxdb')
+                    print('writing drinks_dict to influxdb...\n See Chronograf for more details')
                     _write_client.write(InfluxDB_BUCKET, InfluxDB_ORG, [
                                                     {
                                                         "measurement": "total_drinks", 
@@ -259,7 +262,7 @@ def vending_button_logic():
                                                         "fields": drinks_dict
                                                     }])
 
-                print(f"Dispensing drink_{digit}...")
+                print(f"Dispensing drink_{digit}...\n")
                 print("Dispensing change of WIP")
                 # reset sum_dict
                 sum_dict = {10: 0, 20: 0, 50: 0, 100: 0}
