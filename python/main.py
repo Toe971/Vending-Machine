@@ -183,7 +183,8 @@ def vending_button_logic():
                 # coins always in the vending machine
                 # we still need to implement a check at the start? to see if there are enough coins in the vending machine in the first place
                 # if change_to_deduct is 0
-                algorithm(change_to_deduct, coin_dict)
+                sum_of_change_to_deduct = sum_up_dict(change_to_deduct)
+                algorithm(sum_of_change_to_deduct, coin_dict)
                 has_coin_dict_changed = coin_dict_old != coin_dict
                 if digit == 1:
                     drinks_dict['drink_one'] -= 1
