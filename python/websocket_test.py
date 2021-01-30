@@ -15,17 +15,17 @@ async def handler(websocket, path):
         await asyncio.sleep(1)
 
 
-loop = asyncio.get_event_loop()
+""" loop = asyncio.get_event_loop()
 loop.set_debug(True)  # debug mode
 try:
     loop.run_until_complete(handler("127.0.0.1", 5555))
 finally:
     loop.run_until_complete(loop.shutdown_asyncgens())
-    loop.close()
+    loop.close() """
 
-""" start_server = websockets.serve(handler, "127.0.0.1", 5555) """
+start_server = websockets.serve(handler, "127.0.0.1", 5555)
 
 
-""" asyncio.get_event_loop().run_until_complete()
+asyncio.get_event_loop().run_until_complete()
 asyncio.get_event_loop().run_forever()
- """
+
