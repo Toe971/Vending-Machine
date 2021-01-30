@@ -144,7 +144,6 @@ def vending_button_logic():
 
  
                 def algorithm(change, sum_dict):
-                    stack = 0
                     change_to_give = {10: 0, 20: 0, 50: 0, 100: 0}
                     time.sleep(0.2)
                     if change == 0:
@@ -167,8 +166,7 @@ def vending_button_logic():
                                 change -= 20
                                 algorithm(change, sum_dict)
                             else:
-                                stack += 1
-                                print(stack)
+
                                 if change >= 10 and sum_dict[10] >= 1:
                                     sum_dict[10] -= 1
                                     change_to_give[10] += 1
@@ -195,6 +193,7 @@ def vending_button_logic():
                 # we still need to implement a check at the start? to see if there are enough coins in the vending machine in the first place
                 # if change_to_deduct is 0
                 sum_of_change_to_deduct = sum_up_dict(change_to_deduct)
+                print(sum_of_change_to_deduct)
                 algorithm(sum_of_change_to_deduct, coin_dict)
                 has_coin_dict_changed = coin_dict_old != coin_dict
                 if digit == 1:
