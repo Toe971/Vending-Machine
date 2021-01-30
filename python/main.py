@@ -71,12 +71,6 @@ def vending_button_logic():
     # refactor after feeling less tired 
 
     # helper function to sum up coins inputted so far
-    def sum_up_list(list):
-        sum = 0
-        for i in list:
-            sum += i
-        return sum
-    
     def sum_up_dict(dict):
         sum = 0
         for keys in dict:
@@ -136,76 +130,84 @@ def vending_button_logic():
                 # change is just enough 
                 # user_input = [50, 20], cost_drink = 70
 
-                def vending_machine(sum_dict, cost_drink, final_sum):
-                    # define a recursive function?
+                # the algorithm below needs to refactor, as we violate the principles of functional programming?
+                # the problem now is that we are losing track of what items are being modified by the below algorithm
+
+ 
+                def algorithm(change, sum_dict):
                     change_to_give = {10: 0, 20: 0, 50: 0, 100: 0}
-                    change_to_deduct = {10: 0, 20: 0, 50: 0, 100: 0}
-                    change = final_sum - cost_drink
-                    def algorithm(change):
-                        if change == 0:
-                            return change_to_give
-                        if change >= 100 and sum_dict[100] >= 1:
-                            sum_dict[100] -= 1
-                            change_to_give[100] += 1
-                            change -= 100
-                            algorithm(change)
-                        else:
-                            if change >= 50 and sum_dict[50] >= 1:
-                                sum_dict[50] -= 1
-                                change_to_give[50] += 1
-                                change -= 50
-                                algorithm(change)
-                            else:
-                                if change >= 20 and sum_dict[20] >= 1:
-                                    sum_dict[20] -= 1
-                                    change_to_give[20] += 1
-                                    change -= 20
-                                    algorithm(change)
-                                else:
-                                    if change >= 10 and sum_dict[10] >= 1:
-                                        sum_dict[10] -= 1
-                                        change_to_give[10] += 1
-                                        change -= 10
-                                        algorithm(change)
-                                    else:
-                                        print(change)
-                                        print('End of algorithm')
+                    if change == 0:
                         return change_to_give
-                    algorithm(change)
-                vending_machine(sum_dict, cost_drink, final_sum)
+                    if change >= 100 and sum_dict[100] >= 1:
+                        sum_dict[100] -= 1
+                        change_to_give[100] += 1
+                        change -= 100
+                        algorithm(change, sum_dict)
+                    else:
+                        if change >= 50 and sum_dict[50] >= 1:
+                            sum_dict[50] -= 1
+                            change_to_give[50] += 1
+                            change -= 50
+                            algorithm(change, sum_dict)
+                        else:
+                            if change >= 20 and sum_dict[20] >= 1:
+                                sum_dict[20] -= 1
+                                change_to_give[20] += 1
+                                change -= 20
+                                algorithm(change, sum_dict)
+                            else:
+                                if change >= 10 and sum_dict[10] >= 1:
+                                    sum_dict[10] -= 1
+                                    change_to_give[10] += 1
+                                    change -= 10
+                                    algorithm(change, sum_dict)
+                                else:
+                                    print(change)
+                                    print('End of algorithm')
+                    return change_to_give
 
+                # vending_machine is just a wrapper
+                def vending_machine(sum_dict, cost_drink, final_sum):
+                    change = final_sum - cost_drink
+                    return algorithm(change, sum_dict) 
+                # sum_dict is input from user, cost_drink is the drink's cost            
+                change_to_deduct = vending_machine(sum_dict, cost_drink, final_sum)
 
-                    
-                    
-                   
-                            
-
-                        
-                        
-                for i in sum:
-                    if i == 10:
-                        coins_list[0] += 1
-                    elif i == 20:
-                        coins_list[1] += 1
-                    elif i == 50:
-                        coins_list[2] += 1
-                    elif i == 100:
-                        coins_list[3] += 1
-                    sum.pop(i)
-                if len(sum) != 0:
-                    print('Dispensing change...')
-                    for i in sum:
-                        if i == 10:
-                            coins_list[0] -= 1
-                        elif i == 20:
-                            coins_list[1] -= 1
-                        elif i == 50:
-                            coins_list[2] -= 1
-                        elif i == 100:
-                            coins_list[3] -= 1
-                        sum.pop(i)
-
-                    
+                # feed change to deduct from our vending machine, and use our coins dict from database
+                # this will change our coin_dict which we queried from our database
+                # check if our coin_dict has changed later, if no changes no need to  write to database
+                coin_dict_old = coin_dict
+                # we do not need to save the algorithm's returned value, for now we assume that there are enough 
+                # coins always in the vending machine
+                # we still need to implement a check at the start? to see if there are enough coins in the vending machine in the first place
+                # if change_to_deduct is 0
+                algorithm(change_to_deduct, coin_dict)
+                has_coin_dict_changed = coin_dict_old != coin_dict
+                if digit == 1:
+                    drinks_dict['drink_one'] -= 1
+                if digit == 2:
+                    drinks_dict['drink_two'] -= 1
+                if digit == 3:
+                    drinks_dict['drink_three'] -= 1
+                if has_coin_dict_changed:
+                    # write to InfluxDB both coin_dict and drinks_dict
+                    _write_client.write(InfluxDB_BUCKET, InfluxDB_ORG, [{
+                                                        "measurement": "total_coins", 
+                                                        "tags": {"vending_one": "yishun"},
+                                                        "fields": coin_dict
+                                                    },
+                                                    {
+                                                        "measurement": "total_drinks", 
+                                                        "tags": {"vending_one": "yishun"},
+                                                        "fields": drinks_dict
+                                                    }])
+                else:
+                    _write_client.write(InfluxDB_BUCKET, InfluxDB_ORG, [
+                                                    {
+                                                        "measurement": "total_drinks", 
+                                                        "tags": {"vending_one": "yishun"},
+                                                        "fields": drinks_dict
+                                                    }])
 
             print(f"Dispensing drink_{digit}...")
 
