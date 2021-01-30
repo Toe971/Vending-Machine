@@ -26,8 +26,12 @@ from(bucket: "coins/autogen")
   |> last()
 """
 coins_dataframe = _query_api.query_data_frame(query_coins)
-print(coins_dataframe.to_string())
+""" print(coins_dataframe.to_string()) """
+coins_key = coins_dataframe['_result'].to_list()
 coins_list = coins_dataframe['_value'].to_list()
+coin_dict = dict(zip(coins_key, coins_list))
+print(coin_dict)
+# '_result' is the column name for ten_cents, twenty_cents etc.
 # rearrange coins_list as returned list is fifty_cents, one_dollar, ten_cents, twenty_cents
 # so after below line, coins_list will then be ten_cents, twenty-cents... ascending
 coins_list = [coins_list[2], coins_list[3], coins_list[0], coins_list[1]]
@@ -47,7 +51,7 @@ from(bucket: "coins/autogen")
   |> last()
 """
 drinks_dataframe = _query_api.query_data_frame(query_drinks)
-print(drinks_dataframe.to_string())
+""" print(drinks_dataframe.to_string()) """
 drinks_list = drinks_dataframe['_value'].to_list()
 # rearrange drinks_list as returned drinks_list is drink_one, drink_three, drink_two
 # so after below line drinks_list will be drink_one, drink_two, drink_three
