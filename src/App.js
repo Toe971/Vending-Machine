@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 const {InfluxDB, Point} = require('@influxdata/influxdb-client')
+const {url, token, org, bucket} = require('./env')
 
 
 
 
-const url = "http://localhost:8086";
-const bucket = "coins";
-const org = "";
-const token = "";
 const influxDB = new InfluxDB({
   url: url,
   token: token,
